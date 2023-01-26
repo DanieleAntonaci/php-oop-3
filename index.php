@@ -82,7 +82,7 @@ class Employee extends Person{
     }
     public function getHtml()
     {
-        echo parent::getHtml() .'<br>'. $this-> hireDate .'<br>'. $this->getSalary()-> calcSalary()  . ' &euro;';
+        echo parent::getHtml() . $this-> hireDate .'<br>'. $this->getSalary()-> calcSalary()  . ' &euro;';
     }
 }
 
