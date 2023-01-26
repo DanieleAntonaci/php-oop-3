@@ -57,6 +57,27 @@ class Person {
     }
 }
 
-$persona1 = new Person('Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
+class Employee extends Person{
+    private $hireDate;
+
+    public function __construct($hireDate, $name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode)
+    {
+        $this->setHireDate($hireDate);
+        parent::__construct($name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode);
+    }
+
+    public function setHireDate($hireDate){
+        $this->hireDate = $hireDate;
+    }
+    public function getHireDate(){
+        return $this->hireDate;
+    }
+    public function getHtm()
+    {
+        echo parent::getHtm() . $this-> hireDate;
+    }
+}
+
+$persona1 = new Employee('20-01-2010','Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
 
 $persona1->getHtm();
