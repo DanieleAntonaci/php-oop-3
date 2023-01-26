@@ -78,6 +78,29 @@ class Employee extends Person{
     }
 }
 
+class Manager extends Person{
+    private $dividend;
+
+    public function __construct($dividend, $name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode)
+    {
+        $this->setDividend($dividend);
+        parent::__construct($name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode);
+    }
+
+    public function setDividend($dividend){
+        $this->dividend = $dividend;
+    }
+    public function getDividend(){
+        return $this->dividend;
+    }
+    public function getHtm()
+    {
+        echo parent::getHtm() . $this-> dividend;
+    }
+}
 $persona1 = new Employee('20-01-2010','Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
+$capo1 = new Manager('1000€','Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
 
 $persona1->getHtm();
+echo '<hr>';
+$capo1->getHtm();
