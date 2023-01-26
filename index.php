@@ -80,10 +80,12 @@ class Employee extends Person{
 
 class Manager extends Person{
     private $dividend;
+    private $bonus;
 
-    public function __construct($dividend, $name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode)
+    public function __construct($dividend, $bonus, $name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode)
     {
         $this->setDividend($dividend);
+        $this->setBonus($bonus);
         parent::__construct($name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode);
     }
 
@@ -93,14 +95,70 @@ class Manager extends Person{
     public function getDividend(){
         return $this->dividend;
     }
+    public function setBonus($bonus){
+        $this->bonus = $bonus;
+    }
+    public function getBonus(){
+        return $this->bonus;
+    }
     public function getHtm()
     {
-        echo parent::getHtm() . $this-> dividend;
+        echo parent::getHtm() 
+        . $this-> dividend . ' €<br>'
+        . $this -> bonus . ' €<br>';
     }
 }
+
+class Salary{
+    private $monthlySalary;
+    private $thirteenth;
+    private $fourteenth;
+
+    public function __construct($monthlySalary,$thirteenth,$fourteenth)
+    {
+        $this->setmonthlySalary($monthlySalary);
+        $this->setthirteenth($thirteenth);
+        $this->setfourteenth($fourteenth);
+    }
+    public function setmonthlySalary($monthlySalary){
+        $this->monthlySalary = $monthlySalary;
+    }
+    public function getmonthlySalary(){
+        return $this->monthlySalary;
+    }public function setthirteenth($thirteenth){
+        $this->thirteenth = $thirteenth;
+    }
+    public function getthirteenth(){
+        return $this->thirteenth;
+    }public function setfourteenth($fourteenth){
+        $this->fourteenth = $fourteenth;
+    }
+    public function getfourteenth(){
+        return $this->fourteenth;
+    }
+    public function calcSalary(){
+        $mount = 12;
+        if($this->thirteenth){
+            $mount = $mount + 1;
+        }
+        if($this->fourteenth){
+            $mount = $mount + 1;
+        }
+        echo $this->monthlySalary * $mount;
+    }
+}
+
+
+
+
+
 $persona1 = new Employee('20-01-2010','Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
-$capo1 = new Manager('1000€','Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
+$capo1 = new Manager('1000',100,'Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
 
 $persona1->getHtm();
 echo '<hr>';
 $capo1->getHtm();
+
+echo '<br><hr><br>';
+$stipendio1 = new Salary(1000, true, true);
+$stipendio1->calcSalary();
