@@ -82,7 +82,7 @@ class Employee extends Person{
     }
     public function getHtml()
     {
-        echo parent::getHtml() .'<br>'. $this-> hireDate .'<br>'. $this->getSalary()-> calcSalary()  . ' €';
+        echo parent::getHtml() .'<br>'. $this-> hireDate .'<br>'. $this->getSalary()-> calcSalary()  . ' &euro;';
     }
 }
 
@@ -116,7 +116,7 @@ class Manager extends Person{
     public function getHtml()
     {
         echo parent::getHtml() 
-        . $this-> getSalary() . ' €';
+        . $this-> getSalary() . ' &euro;';
     }
 }
 
