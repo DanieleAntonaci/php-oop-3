@@ -48,7 +48,7 @@ class Person {
         return $this -> fiscalCode;
     }
 
-    public function getHtm(){
+    public function getHtml(){
         echo $this->name . '<br>'
             . $this->surname . '<br>'
             . $this->dateOfBirth . '<br>'
@@ -59,10 +59,12 @@ class Person {
 
 class Employee extends Person{
     private $hireDate;
+    private Salary $salary;
 
-    public function __construct($hireDate, $name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode)
+    public function __construct($hireDate, $name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode, Salary $salary)
     {
         $this->setHireDate($hireDate);
+        $this->setSalary($salary);
         parent::__construct($name, $surname, $dateOfBirth, $placeOfBirth, $fiscalCode);
     }
 
@@ -72,9 +74,15 @@ class Employee extends Person{
     public function getHireDate(){
         return $this->hireDate;
     }
-    public function getHtm()
+    public function setSalary(Salary $salary){
+        $this->salary = $salary;
+    }
+    public function getSalary(){
+        return $this->salary;
+    }
+    public function getHtml()
     {
-        echo parent::getHtm() . $this-> hireDate;
+        echo parent::getHtml() . $this-> hireDate . $this->getSalary()-> calcSalary();
     }
 }
 
@@ -101,9 +109,9 @@ class Manager extends Person{
     public function getBonus(){
         return $this->bonus;
     }
-    public function getHtm()
+    public function getHtml()
     {
-        echo parent::getHtm() 
+        echo parent::getHtml() 
         . $this-> dividend . ' €<br>'
         . $this -> bonus . ' €<br>';
     }
@@ -152,13 +160,11 @@ class Salary{
 
 
 
-$persona1 = new Employee('20-01-2010','Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
+$persona1 = new Employee('20-01-2010','Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud',new Salary(1000, true, true));
 $capo1 = new Manager('1000',100,'Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
 
-$persona1->getHtm();
+$persona1->getHtml();
 echo '<hr>';
-$capo1->getHtm();
+$capo1->getHtml();
 
 echo '<br><hr><br>';
-$stipendio1 = new Salary(1000, true, true);
-$stipendio1->calcSalary();
