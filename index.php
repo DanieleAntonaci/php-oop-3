@@ -49,7 +49,7 @@ class Person {
     }
 
     public function getHtml(){
-        echo $this->name . '<br>'
+        return $this->name . '<br>'
             . $this->surname . '<br>'
             . $this->dateOfBirth . '<br>'
             . $this->placeOfBirth . '<br>'
@@ -82,7 +82,7 @@ class Employee extends Person{
     }
     public function getHtml()
     {
-        echo parent::getHtml() . $this-> hireDate . $this->getSalary()-> calcSalary();
+        echo parent::getHtml() .'<br>'. $this-> hireDate .'<br>'. $this->getSalary()-> calcSalary()  . ' €';
     }
 }
 
@@ -109,11 +109,14 @@ class Manager extends Person{
     public function getBonus(){
         return $this->bonus;
     }
+    public function getSalary(){
+        return ($this->dividend * 12) + $this->bonus; 
+    }
+
     public function getHtml()
     {
         echo parent::getHtml() 
-        . $this-> dividend . ' €<br>'
-        . $this -> bonus . ' €<br>';
+        . $this-> getSalary() . ' €';
     }
 }
 
@@ -147,12 +150,13 @@ class Salary{
     public function calcSalary(){
         $mount = 12;
         if($this->thirteenth){
-            $mount = $mount + 1;
+            $mount += 1;
+
+            if($this->fourteenth){
+                $mount += 1; 
+            }
         }
-        if($this->fourteenth){
-            $mount = $mount + 1;
-        }
-        echo $this->monthlySalary * $mount;
+        return $this->monthlySalary * $mount;
     }
 }
 
@@ -161,7 +165,7 @@ class Salary{
 
 
 $persona1 = new Employee('20-01-2010','Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud',new Salary(1000, true, true));
-$capo1 = new Manager('1000',100,'Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
+$capo1 = new Manager('2000',1000,'Dan', 'ant', '20-01-2000', 'Milano', 'hgdugduhgdhwud');
 
 $persona1->getHtml();
 echo '<hr>';
